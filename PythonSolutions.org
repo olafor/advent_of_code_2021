@@ -1,0 +1,46 @@
+#+TITLE: Python Solutions
+#+OPTIONS: ^:nil
+#+STARTUP: content
+
+* Sonar Sweep (Dag 1)
+** First Part
+#+begin_src python :results output :python python3
+  numbers = []
+  with open("SonarSweepInput.txt") as fd:
+    for element in fd:
+      numbers.append(int(element.strip()))
+  
+  sum = 0
+  prevNumber = numbers[0]
+  
+  for currentNumber in numbers:
+    if currentNumber > prevNumber:
+      sum += 1
+    prevNumber = currentNumber
+  
+  print(sum)
+  
+#+end_src
+
+#+RESULTS:
+: 1390
+
+** Second Part
+#+begin_src python :results output :python python3
+  numbers = []
+  with open("SonarSweepInput.txt") as fd:
+    for element in fd:
+      numbers.append(int(element.strip()))
+  
+  sum = 0
+  
+  for i in range(3,len(numbers)):
+    if numbers[i-3] < numbers[i]:
+      sum += 1
+  
+  print(sum)
+  
+#+end_src
+
+#+RESULTS:
+: 1457
