@@ -1,0 +1,29 @@
+#+OPTIONS: ^:nil
+#+STARTUP: content
+
+* Sonar Sweep (Dag 1)
+** First Part
+
+#+begin_src ruby :results output
+  numbers = Array.new
+  file = File.open("SonarSweepInput.txt", "r")
+  while !file.eof?
+    tmp = file.readline.to_i
+    numbers.append(tmp)
+  end
+  
+  sum = 0
+  prevNumber = numbers.first
+  numbers.each do |currentNumber|
+    if currentNumber > prevNumber
+      sum += 1
+    end
+    prevNumber = currentNumber
+  end
+  puts sum
+  
+#+end_src
+
+#+RESULTS:
+: 1390
+
