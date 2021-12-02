@@ -44,3 +44,63 @@
 
 #+RESULTS:
 : 1457
+
+* Dive! (Dag 2)
+** First Part
+#+begin_src python :results output :python python3
+  input = []
+  with open("DiveInput.txt") as fd:
+    for element in fd:
+      input.append(element.strip())
+  
+  horizontalPos = 0
+  depthPos = 0
+  
+  for i in input:
+    direction, value = i.split(" ")
+    if direction == "forward":
+      horizontalPos += int(value)
+    elif direction == "up":
+      depthPos -= int(value)
+    elif direction == "down":
+      depthPos += int(value)
+    else:
+      print("Something is wrong!")
+  
+  print(depthPos * horizontalPos)
+  
+  
+#+end_src
+
+#+RESULTS:
+: 2073315
+
+** Second Part
+#+begin_src python :results output :python python3
+  input = []
+  with open("DiveInput.txt") as fd:
+    for element in fd:
+      input.append(element.strip())
+  
+  horizontalPos = 0
+  depthPos = 0
+  aim = 0
+  
+  for i in input:
+    direction, value = i.split(" ")
+    if direction == "forward":
+      horizontalPos += int(value)
+      depthPos += aim * int(value)
+    elif direction == "up":
+      aim -= int(value)
+    elif direction == "down":
+      aim += int(value)
+    else:
+      print("Something is wrong!")
+  
+  print(depthPos * horizontalPos)
+#+end_src
+
+#+RESULTS:
+: 1840311528
+
