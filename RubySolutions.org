@@ -51,3 +51,72 @@
 #+RESULTS:
 : 1457
 
+
+* Dive! (Dag 2)
+** First Part
+#+begin_src ruby :results output
+  input = Array.new
+  file = File.open("DiveInput.txt", "r")
+  while !file.eof?
+    element = file.readline
+    input.append(element)
+  end
+
+  horizontalPos = 0
+  depthPos = 0
+
+  input.each do |content|
+    direction, value = content.split(' ')
+    case direction
+      when "forward"
+        horizontalPos += value.to_i
+      when "up"
+        depthPos -= value.to_i
+      when "down"
+        depthPos += value.to_i
+      else
+        puts "Something is wrong!"
+      end
+  end
+
+  puts depthPos * horizontalPos
+#+end_src
+
+#+RESULTS:
+: 2073315
+
+** Part Two
+#+begin_src ruby :results output
+  input = Array.new
+  file = File.open("DiveInput.txt", "r")
+  while !file.eof?
+    element = file.readline
+    input.append(element)
+  end
+
+  horizontalPos = 0
+  depthPos = 0
+  aim = 0
+
+  input.each do |content|
+    direction, value = content.split(' ')
+    case direction
+      when "forward"
+        horizontalPos += value.to_i
+        depthPos += aim * value.to_i
+      when "up"
+        aim -= value.to_i
+      when "down"
+        depthPos += value.to_i
+        aim += value.to_i
+      else
+        puts "Something is wrong!"
+      end
+  end
+
+  puts depthPos * horizontalPos
+#+end_src
+
+#+RESULTS:
+: 1844293118
+
