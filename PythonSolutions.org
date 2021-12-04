@@ -254,3 +254,86 @@
 
 #+RESULTS:
 : 63424
+** Second Part
+#+begin_src python :results output :python python3
+  input = []
+  with open("GiantSquidInput.txt") as fd:
+      for element in fd:
+          input.append(element.strip())
+
+  drawnNumbers = input[0].split(',')
+  input = input[1:]
+  input = [x for x in input if len(x) > 0]
+  availableBoardsRows = []
+  availableBoardsColumns = []
+
+  for i in range(0, len(input)-4, 5):
+      newBoardRows = []
+      newBoardColumns = []
+      for j in range(0, 5):
+          row = i + j
+          if len(input[row]) > 0:
+              rowList = input[row].split()
+              newBoardRows.append(rowList)
+      newBoardColumns = [list(i) for i in zip(*newBoardRows)]
+
+      rowsToDicts = []
+      columnsToDicts = []
+
+      for row in newBoardRows:
+          rowsToDicts.append({x: False for x in row})
+
+      for column in newBoardColumns:
+          columnsToDicts.append({x: False for x in column})
+
+      availableBoardsRows.append(rowsToDicts)
+      availableBoardsColumns.append(columnsToDicts)
+
+  def computeResult(latestNum, winningBoard):
+      sumOfUncalled = 0
+      for section in winningBoard:
+          for key,value in section.items():
+              if value is False:
+                  sumOfUncalled += int(key)
+      return sumOfUncalled * int(latestNum)
+
+  def processBingo():
+      global drawnNumbers
+      global availableBoardsRows
+      global availableBoardsColumns
+
+      successiveWinners = []
+
+      for drawnNum in drawnNumbers:
+        for i in range(len(availableBoardsRows)):
+            if len(availableBoardsRows[i]) > 0:
+                for j in range(len(availableBoardsRows[i])):
+                    rowDict = availableBoardsRows[i][j]
+                    columnDict = availableBoardsColumns[i][j]
+                    for num in rowDict:
+                        if drawnNum == num:
+                            rowDict[num] = True
+                    for num in columnDict:
+                        if drawnNum == num:
+                            columnDict[num] = True
+                    if all(value == True for value in rowDict.values()):
+                        winner = availableBoardsRows[i]
+                        successiveWinners.append(computeResult(drawnNum, winner))
+                        availableBoardsRows[i] = []
+                        availableBoardsColumns[i] = []
+                        break
+                    elif all(value == True for value in columnDict.values()):
+                        winner = availableBoardsColumns[i]
+                        successiveWinners.append(computeResult(drawnNum, winner))
+                        availableBoardsRows[i] = []
+                        availableBoardsColumns[i] = []
+                        break
+      return successiveWinners
+
+  winners = processBingo()
+  print(winners[-1])
+
+#+end_src
+
+#+RESULTS:
+: 23541
