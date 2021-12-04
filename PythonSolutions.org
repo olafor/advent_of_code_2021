@@ -1,6 +1,6 @@
 #+TITLE: Python Solutions
 #+OPTIONS: ^:nil
-#+STARTUP: content
+#+STARTUP: overview
 
 * Sonar Sweep (Dag 1)
 ** First Part
@@ -104,3 +104,153 @@
 #+RESULTS:
 : 1840311528
 
+* Binary Diagnostic (Dag 3)
+** First Part
+#+begin_src python :results output :python python3
+  input = []
+  with open("BinaryDiagnosticInput.txt") as fd:
+    for element in fd:
+      input.append(element.strip())
+  
+  numLength = len(input[0])
+  summedColumnOnes = [0 for i in range(numLength)]
+  gammaRate = ""
+  epsilonRate = ""
+  
+  for number in input:
+    for i in range(numLength):
+      if (number[i] == "1"):
+        summedColumnOnes[i] += 1
+  
+  for sumOfOnes in summedColumnOnes:
+    if sumOfOnes > len(input) / 2:
+      gammaRate += "1"
+      epsilonRate += "0"
+    else:
+      gammaRate += "0"
+      epsilonRate += "1"
+  
+  print(int(gammaRate, 2) * int(epsilonRate, 2))
+#+end_src
+
+#+RESULTS:
+: 3847100
+
+** Second Part
+#+begin_src python :results output :python python3
+  input = []
+  with open("BinaryDiagnosticInput.txt") as fd:
+    for element in fd:
+      input.append(element.strip())
+  
+  numLength = len(input[0])
+  trackingOGR = input.copy()
+  trackingCSR = input.copy()
+  
+  for column in range(numLength):
+    sumOfOnes = 0
+    for number in trackingOGR:
+      if number[column] == "1":
+        sumOfOnes += 1
+  
+    if sumOfOnes < len(trackingOGR) / 2:
+      trackingOGR = [x for x in trackingOGR if x[column] == "0"]
+    else:
+      trackingOGR = [x for x in trackingOGR if x[column] == "1"]
+    if len(trackingOGR) is 1:
+      break
+  
+  for column in range(numLength):
+    sumOfOnes = 0
+    for number in trackingCSR:
+      if number[column] == "1":
+        sumOfOnes += 1
+  
+    if sumOfOnes < len(trackingCSR) / 2:
+      trackingCSR = [x for x in trackingCSR if x[column] == "1"]
+    else:
+      trackingCSR = [x for x in trackingCSR if x[column] == "0"]
+    if len(trackingCSR) is 1:
+      break
+  
+  oxygenGeneratorRating = int(trackingOGR[0], 2)
+  co2ScrubberRating = int(trackingCSR[0], 2)
+  
+  print(oxygenGeneratorRating * co2ScrubberRating)
+#+end_src
+
+#+RESULTS:
+: 4105235
+
+* Giant Squid (Dag 4)
+** First Part
+#+begin_src python :results output :python python3
+  input = []
+  with open("GiantSquidInput.txt") as fd:
+      for element in fd:
+          input.append(element.strip())
+  
+  drawnNumbers = input[0].split(',')
+  input = input[1:]
+  input = [x for x in input if len(x) > 0]
+  availableBoardsRows = []
+  availableBoardsColumns = []
+  
+  for i in range(0, len(input)-4, 5):
+      newBoardRows = []
+      newBoardColumns = []
+      for j in range(0, 5):
+          row = i + j
+          if len(input[row]) > 0:
+              rowList = input[row].split()
+              newBoardRows.append(rowList)
+      newBoardColumns = [list(i) for i in zip(*newBoardRows)]
+  
+      rowsToDicts = []
+      columnsToDicts = []
+  
+      for row in newBoardRows:
+          rowsToDicts.append({x: False for x in row})
+  
+      for column in newBoardColumns:
+          columnsToDicts.append({x: False for x in column})
+  
+      availableBoardsRows.append(rowsToDicts)
+      availableBoardsColumns.append(columnsToDicts)
+  
+  def computeResult(latestNum, winningBoard):
+      sumOfUncalled = 0
+      for section in winningBoard:
+          for key,value in section.items():
+              if value is False:
+                  sumOfUncalled += int(key)
+      return sumOfUncalled * int(latestNum)
+  
+  def processBingo(): 
+      global drawnNumbers
+      global availableBoardsRows
+      global availableBoardsColumns
+      for drawnNum in drawnNumbers:
+        for i in range(len(availableBoardsRows)):
+            for j in range(len(availableBoardsRows[i])):
+                rowDict = availableBoardsRows[i][j]
+                columnDict = availableBoardsColumns[i][j]
+                for num in rowDict:
+                    if drawnNum == num:
+                        rowDict[num] = True
+                for num in columnDict:
+                    if drawnNum == num:
+                        columnDict[num] = True
+                if all(value == True for value in rowDict.values()):
+                    winner = availableBoardsRows[i]
+                    return computeResult(drawnNum, winner)
+                if all(value == True for value in columnDict.values()):
+                    winner = availableBoardsColumns[i]
+                    return computeResult(drawnNum, winner)
+  
+  print(processBingo())
+  
+#+end_src
+
+#+RESULTS:
+: 63424

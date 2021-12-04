@@ -107,7 +107,6 @@
       when "up"
         aim -= value.to_i
       when "down"
-        depthPos += value.to_i
         aim += value.to_i
       else
         puts "Something is wrong!"
@@ -118,5 +117,5 @@
 #+end_src
 
 #+RESULTS:
-: 1844293118
+: 1840311528
 
