@@ -338,7 +338,6 @@
 #+RESULTS:
 : 23541
 
-
 * Hydrothermal Venture (Dag 5)
 ** First Part
 #+begin_src python :results output :python python3
@@ -346,30 +345,44 @@
   with open("HydrothermalVentureInput.txt") as fd:
     for element in fd:
       input.append(element.strip())
-
-  input = [x.split("->") for x in input]
-
+  
+  input = [x.split(" -> ") for x in input]
+  
   listOfAllPoints = []
   overlappingPointsDict = {}
-
+  
   def generatePointsForEntry(entry):
     pointA = entry[0].split(",")
     pointB = entry[1].split(",")
     pointA = [int(x) for x in pointA]
     pointB = [int(x) for x in pointB]
     if pointA[0] == pointB[0]:
-      staticPoint = pointA[0]
-      theRange = list(pointA[1] + pointB[1])
+      xPoint = pointA[0]
+      theRange = [pointA[1] , pointB[1]]
+      return [str(xPoint) + "," + str(y) for y in range(min(theRange), max(theRange) + 1)]
+    elif pointA[1] == pointB[1]:
+      yPoint = pointB[1]
+      theRange = [pointA[0] , pointB[0]]
+      return [str(x) + "," + str(yPoint) for x in range(min(theRange), max(theRange) + 1)]
     else:
-      staticPoint = pointA[1]
-      theRange = list(pointA[0] + pointB[0])
-
-
-  generatePointsForEntry(input[0])
-
-
+      return []
+  
+  for entry in input:
+    listOfAllPoints.append(generatePointsForEntry(entry))
+  
+  for points in listOfAllPoints:
+    if points:
+      for point in points:
+        if point in overlappingPointsDict:
+            overlappingPointsDict[point] += 1
+        else:
+            overlappingPointsDict.update({point : 1})
+  
+  allOverlappingValues = [x for x in overlappingPointsDict.values() if x > 1]
+  
+  print(len(allOverlappingValues))
+  
 #+end_src
 
 #+RESULTS:
-: [682, 519]
-: [682, 729]
+: 6189
