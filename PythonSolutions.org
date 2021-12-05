@@ -345,12 +345,12 @@
   with open("HydrothermalVentureInput.txt") as fd:
     for element in fd:
       input.append(element.strip())
-  
+
   input = [x.split(" -> ") for x in input]
-  
+
   listOfAllPoints = []
   overlappingPointsDict = {}
-  
+
   def generatePointsForEntry(entry):
     pointA = entry[0].split(",")
     pointB = entry[1].split(",")
@@ -366,10 +366,10 @@
       return [str(x) + "," + str(yPoint) for x in range(min(theRange), max(theRange) + 1)]
     else:
       return []
-  
+
   for entry in input:
     listOfAllPoints.append(generatePointsForEntry(entry))
-  
+
   for points in listOfAllPoints:
     if points:
       for point in points:
@@ -377,12 +377,75 @@
             overlappingPointsDict[point] += 1
         else:
             overlappingPointsDict.update({point : 1})
-  
+
   allOverlappingValues = [x for x in overlappingPointsDict.values() if x > 1]
-  
+
   print(len(allOverlappingValues))
-  
+
 #+end_src
 
 #+RESULTS:
 : 6189
+** Second Part
+#+begin_src python :results output :python python3
+  input = []
+  with open("HydrothermalVentureInput.txt") as fd:
+    for element in fd:
+      input.append(element.strip())
+
+  input = [x.split(" -> ") for x in input]
+
+  listOfAllPoints = []
+  overlappingPointsDict = {}
+
+  def generatePointsForEntry(entry):
+    pointA = entry[0].split(",")
+    pointB = entry[1].split(",")
+    pointA = [int(x) for x in pointA]
+    pointB = [int(x) for x in pointB]
+    if pointA[0] == pointB[0]:
+      xPoint = pointA[0]
+      theRange = [pointA[1] , pointB[1]]
+      return [str(xPoint) + "," + str(y) for y in range(min(theRange), max(theRange) + 1)]
+    elif pointA[1] == pointB[1]:
+      yPoint = pointB[1]
+      theRange = [pointA[0] , pointB[0]]
+      return [str(x) + "," + str(yPoint) for x in range(min(theRange), max(theRange) + 1)]
+    else:
+      reverseX = False
+      reverseY = False
+      if pointA[0] > pointB[0]:
+        reverseX = True
+      if pointA[1] > pointB[1]:
+        reverseY = True
+      xValues = [x for x in range(min(pointA[0], pointB[0]), max(pointA[0], pointB[0])+1)]
+      yValues = [y for y in range(min(pointA[1], pointB[1]), max(pointA[1], pointB[1])+1)]
+      if reverseX:
+        xValues.reverse()
+      if reverseY:
+        yValues.reverse()
+      generatedPoints = []
+      for i in range(len(xValues)):
+        generatedPoints.append(str(xValues[i]) + "," + str(yValues[i]))
+      return generatedPoints
+
+
+  for entry in input:
+    listOfAllPoints.append(generatePointsForEntry(entry))
+
+  for points in listOfAllPoints:
+    if points:
+      for point in points:
+        if point in overlappingPointsDict:
+            overlappingPointsDict[point] += 1
+        else:
+            overlappingPointsDict.update({point : 1})
+
+  allOverlappingValues = [x for x in overlappingPointsDict.values() if x > 1]
+
+  print(len(allOverlappingValues))
+
+#+end_src
+
+#+RESULTS:
+: 19164

@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-12-05 sön 23:12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python Solutions</title>
+<meta name="author" content="Carl Ola Fornander" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Python Solutions</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org35abffa">1. Sonar Sweep (Dag 1)</a>
+<ul>
+<li><a href="#org3184515">1.1. First Part</a></li>
+<li><a href="#orgd7f935b">1.2. Second Part</a></li>
+</ul>
+</li>
+<li><a href="#org7ed48b4">2. Dive! (Dag 2)</a>
+<ul>
+<li><a href="#org2192481">2.1. First Part</a></li>
+<li><a href="#org314fb72">2.2. Second Part</a></li>
+</ul>
+</li>
+<li><a href="#orgac8e734">3. Binary Diagnostic (Dag 3)</a>
+<ul>
+<li><a href="#org7d70c22">3.1. First Part</a></li>
+<li><a href="#org70b1ffb">3.2. Second Part</a></li>
+</ul>
+</li>
+<li><a href="#org2fc70a7">4. Giant Squid (Dag 4)</a>
+<ul>
+<li><a href="#orgc472baa">4.1. First Part</a></li>
+<li><a href="#orge5d3305">4.2. Second Part</a></li>
+</ul>
+</li>
+<li><a href="#orgb83bb6e">5. Hydrothermal Venture (Dag 5)</a>
+<ul>
+<li><a href="#org9019b71">5.1. First Part</a></li>
+<li><a href="#org7f30d6f">5.2. Second Part</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org35abffa" class="outline-2">
+<h2 id="org35abffa"><span class="section-number-2">1.</span> Sonar Sweep (Dag 1)</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org3184515" class="outline-3">
+<h3 id="org3184515"><span class="section-number-3">1.1.</span> First Part</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #a0522d;">numbers</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a020f0;">with</span> <span style="color: #483d8b;">open</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"SonarSweepInput.txt"</span><span style="color: #707183;">)</span> <span style="color: #a020f0;">as</span> fd:
+  <span style="color: #a020f0;">for</span> element <span style="color: #a020f0;">in</span> fd:
+    numbers.append<span style="color: #707183;">(</span><span style="color: #483d8b;">int</span><span style="color: #7388d6;">(</span>element.strip<span style="color: #909183;">()</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #483d8b;">sum</span> = 0
+<span style="color: #a0522d;">prevNumber</span> = numbers<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>
+
+<span style="color: #a020f0;">for</span> currentNumber <span style="color: #a020f0;">in</span> numbers:
+  <span style="color: #a020f0;">if</span> currentNumber &gt; prevNumber:
+    <span style="color: #483d8b;">sum</span> += 1
+  <span style="color: #a0522d;">prevNumber</span> = currentNumber
+
+<span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #483d8b;">sum</span><span style="color: #707183;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd7f935b" class="outline-3">
+<h3 id="orgd7f935b"><span class="section-number-3">1.2.</span> Second Part</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #a0522d;">numbers</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a020f0;">with</span> <span style="color: #483d8b;">open</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"SonarSweepInput.txt"</span><span style="color: #707183;">)</span> <span style="color: #a020f0;">as</span> fd:
+  <span style="color: #a020f0;">for</span> element <span style="color: #a020f0;">in</span> fd:
+    numbers.append<span style="color: #707183;">(</span><span style="color: #483d8b;">int</span><span style="color: #7388d6;">(</span>element.strip<span style="color: #909183;">()</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #483d8b;">sum</span> = 0
+
+<span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span>3,<span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>numbers<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>:
+  <span style="color: #a020f0;">if</span> numbers<span style="color: #707183;">[</span>i-3<span style="color: #707183;">]</span> &lt; numbers<span style="color: #707183;">[</span>i<span style="color: #707183;">]</span>:
+    <span style="color: #483d8b;">sum</span> += 1
+
+<span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #483d8b;">sum</span><span style="color: #707183;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7ed48b4" class="outline-2">
+<h2 id="org7ed48b4"><span class="section-number-2">2.</span> Dive! (Dag 2)</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org2192481" class="outline-3">
+<h3 id="org2192481"><span class="section-number-3">2.1.</span> First Part</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #483d8b;">input</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a020f0;">with</span> <span style="color: #483d8b;">open</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"DiveInput.txt"</span><span style="color: #707183;">)</span> <span style="color: #a020f0;">as</span> fd:
+  <span style="color: #a020f0;">for</span> element <span style="color: #a020f0;">in</span> fd:
+    <span style="color: #483d8b;">input</span>.append<span style="color: #707183;">(</span>element.strip<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>
+
+<span style="color: #a0522d;">horizontalPos</span> = 0
+<span style="color: #a0522d;">depthPos</span> = 0
+
+<span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">input</span>:
+  <span style="color: #a0522d;">direction</span>, <span style="color: #a0522d;">value</span> = i.split<span style="color: #707183;">(</span><span style="color: #8b2252;">" "</span><span style="color: #707183;">)</span>
+  <span style="color: #a020f0;">if</span> direction == <span style="color: #8b2252;">"forward"</span>:
+    <span style="color: #a0522d;">horizontalPos</span> += <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>value<span style="color: #707183;">)</span>
+  <span style="color: #a020f0;">elif</span> direction == <span style="color: #8b2252;">"up"</span>:
+    <span style="color: #a0522d;">depthPos</span> -= <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>value<span style="color: #707183;">)</span>
+  <span style="color: #a020f0;">elif</span> direction == <span style="color: #8b2252;">"down"</span>:
+    <span style="color: #a0522d;">depthPos</span> += <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>value<span style="color: #707183;">)</span>
+  <span style="color: #a020f0;">else</span>:
+    <span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"Something is wrong!"</span><span style="color: #707183;">)</span>
+
+<span style="color: #a020f0;">print</span><span style="color: #707183;">(</span>depthPos * horizontalPos<span style="color: #707183;">)</span>
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org314fb72" class="outline-3">
+<h3 id="org314fb72"><span class="section-number-3">2.2.</span> Second Part</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #483d8b;">input</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a020f0;">with</span> <span style="color: #483d8b;">open</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"DiveInput.txt"</span><span style="color: #707183;">)</span> <span style="color: #a020f0;">as</span> fd:
+  <span style="color: #a020f0;">for</span> element <span style="color: #a020f0;">in</span> fd:
+    <span style="color: #483d8b;">input</span>.append<span style="color: #707183;">(</span>element.strip<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>
+
+<span style="color: #a0522d;">horizontalPos</span> = 0
+<span style="color: #a0522d;">depthPos</span> = 0
+<span style="color: #a0522d;">aim</span> = 0
+
+<span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">input</span>:
+  <span style="color: #a0522d;">direction</span>, <span style="color: #a0522d;">value</span> = i.split<span style="color: #707183;">(</span><span style="color: #8b2252;">" "</span><span style="color: #707183;">)</span>
+  <span style="color: #a020f0;">if</span> direction == <span style="color: #8b2252;">"forward"</span>:
+    <span style="color: #a0522d;">horizontalPos</span> += <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>value<span style="color: #707183;">)</span>
+    <span style="color: #a0522d;">depthPos</span> += aim * <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>value<span style="color: #707183;">)</span>
+  <span style="color: #a020f0;">elif</span> direction == <span style="color: #8b2252;">"up"</span>:
+    <span style="color: #a0522d;">aim</span> -= <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>value<span style="color: #707183;">)</span>
+  <span style="color: #a020f0;">elif</span> direction == <span style="color: #8b2252;">"down"</span>:
+    <span style="color: #a0522d;">aim</span> += <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>value<span style="color: #707183;">)</span>
+  <span style="color: #a020f0;">else</span>:
+    <span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"Something is wrong!"</span><span style="color: #707183;">)</span>
+
+<span style="color: #a020f0;">print</span><span style="color: #707183;">(</span>depthPos * horizontalPos<span style="color: #707183;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgac8e734" class="outline-2">
+<h2 id="orgac8e734"><span class="section-number-2">3.</span> Binary Diagnostic (Dag 3)</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org7d70c22" class="outline-3">
+<h3 id="org7d70c22"><span class="section-number-3">3.1.</span> First Part</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #483d8b;">input</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a020f0;">with</span> <span style="color: #483d8b;">open</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"BinaryDiagnosticInput.txt"</span><span style="color: #707183;">)</span> <span style="color: #a020f0;">as</span> fd:
+  <span style="color: #a020f0;">for</span> element <span style="color: #a020f0;">in</span> fd:
+    <span style="color: #483d8b;">input</span>.append<span style="color: #707183;">(</span>element.strip<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>
+
+<span style="color: #a0522d;">numLength</span> = <span style="color: #483d8b;">len</span><span style="color: #707183;">(</span><span style="color: #483d8b;">input</span><span style="color: #7388d6;">[</span>0<span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
+<span style="color: #a0522d;">summedColumnOnes</span> = <span style="color: #707183;">[</span>0 <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #7388d6;">(</span>numLength<span style="color: #7388d6;">)</span><span style="color: #707183;">]</span>
+<span style="color: #a0522d;">gammaRate</span> = <span style="color: #8b2252;">""</span>
+<span style="color: #a0522d;">epsilonRate</span> = <span style="color: #8b2252;">""</span>
+
+<span style="color: #a020f0;">for</span> number <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">input</span>:
+  <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span>numLength<span style="color: #707183;">)</span>:
+    <span style="color: #a020f0;">if</span> <span style="color: #707183;">(</span>number<span style="color: #7388d6;">[</span>i<span style="color: #7388d6;">]</span> == <span style="color: #8b2252;">"1"</span><span style="color: #707183;">)</span>:
+      <span style="color: #a0522d;">summedColumnOnes</span><span style="color: #707183;">[</span>i<span style="color: #707183;">]</span> += 1
+
+<span style="color: #a020f0;">for</span> sumOfOnes <span style="color: #a020f0;">in</span> summedColumnOnes:
+  <span style="color: #a020f0;">if</span> sumOfOnes &gt; <span style="color: #483d8b;">len</span><span style="color: #707183;">(</span><span style="color: #483d8b;">input</span><span style="color: #707183;">)</span> / 2:
+    <span style="color: #a0522d;">gammaRate</span> += <span style="color: #8b2252;">"1"</span>
+    <span style="color: #a0522d;">epsilonRate</span> += <span style="color: #8b2252;">"0"</span>
+  <span style="color: #a020f0;">else</span>:
+    <span style="color: #a0522d;">gammaRate</span> += <span style="color: #8b2252;">"0"</span>
+    <span style="color: #a0522d;">epsilonRate</span> += <span style="color: #8b2252;">"1"</span>
+
+<span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #483d8b;">int</span><span style="color: #7388d6;">(</span>gammaRate, 2<span style="color: #7388d6;">)</span> * <span style="color: #483d8b;">int</span><span style="color: #7388d6;">(</span>epsilonRate, 2<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org70b1ffb" class="outline-3">
+<h3 id="org70b1ffb"><span class="section-number-3">3.2.</span> Second Part</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #483d8b;">input</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a020f0;">with</span> <span style="color: #483d8b;">open</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"BinaryDiagnosticInput.txt"</span><span style="color: #707183;">)</span> <span style="color: #a020f0;">as</span> fd:
+  <span style="color: #a020f0;">for</span> element <span style="color: #a020f0;">in</span> fd:
+    <span style="color: #483d8b;">input</span>.append<span style="color: #707183;">(</span>element.strip<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>
+
+<span style="color: #a0522d;">numLength</span> = <span style="color: #483d8b;">len</span><span style="color: #707183;">(</span><span style="color: #483d8b;">input</span><span style="color: #7388d6;">[</span>0<span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
+<span style="color: #a0522d;">trackingOGR</span> = <span style="color: #483d8b;">input</span>.copy<span style="color: #707183;">()</span>
+<span style="color: #a0522d;">trackingCSR</span> = <span style="color: #483d8b;">input</span>.copy<span style="color: #707183;">()</span>
+
+<span style="color: #a020f0;">for</span> column <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span>numLength<span style="color: #707183;">)</span>:
+  <span style="color: #a0522d;">sumOfOnes</span> = 0
+  <span style="color: #a020f0;">for</span> number <span style="color: #a020f0;">in</span> trackingOGR:
+    <span style="color: #a020f0;">if</span> number<span style="color: #707183;">[</span>column<span style="color: #707183;">]</span> == <span style="color: #8b2252;">"1"</span>:
+      <span style="color: #a0522d;">sumOfOnes</span> += 1
+
+  <span style="color: #a020f0;">if</span> sumOfOnes &lt; <span style="color: #483d8b;">len</span><span style="color: #707183;">(</span>trackingOGR<span style="color: #707183;">)</span> / 2:
+    <span style="color: #a0522d;">trackingOGR</span> = <span style="color: #707183;">[</span>x <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> trackingOGR <span style="color: #a020f0;">if</span> x<span style="color: #7388d6;">[</span>column<span style="color: #7388d6;">]</span> == <span style="color: #8b2252;">"0"</span><span style="color: #707183;">]</span>
+  <span style="color: #a020f0;">else</span>:
+    <span style="color: #a0522d;">trackingOGR</span> = <span style="color: #707183;">[</span>x <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> trackingOGR <span style="color: #a020f0;">if</span> x<span style="color: #7388d6;">[</span>column<span style="color: #7388d6;">]</span> == <span style="color: #8b2252;">"1"</span><span style="color: #707183;">]</span>
+  <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">len</span><span style="color: #707183;">(</span>trackingOGR<span style="color: #707183;">)</span> <span style="color: #a020f0;">is</span> 1:
+    <span style="color: #a020f0;">break</span>
+
+<span style="color: #a020f0;">for</span> column <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span>numLength<span style="color: #707183;">)</span>:
+  <span style="color: #a0522d;">sumOfOnes</span> = 0
+  <span style="color: #a020f0;">for</span> number <span style="color: #a020f0;">in</span> trackingCSR:
+    <span style="color: #a020f0;">if</span> number<span style="color: #707183;">[</span>column<span style="color: #707183;">]</span> == <span style="color: #8b2252;">"1"</span>:
+      <span style="color: #a0522d;">sumOfOnes</span> += 1
+
+  <span style="color: #a020f0;">if</span> sumOfOnes &lt; <span style="color: #483d8b;">len</span><span style="color: #707183;">(</span>trackingCSR<span style="color: #707183;">)</span> / 2:
+    <span style="color: #a0522d;">trackingCSR</span> = <span style="color: #707183;">[</span>x <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> trackingCSR <span style="color: #a020f0;">if</span> x<span style="color: #7388d6;">[</span>column<span style="color: #7388d6;">]</span> == <span style="color: #8b2252;">"1"</span><span style="color: #707183;">]</span>
+  <span style="color: #a020f0;">else</span>:
+    <span style="color: #a0522d;">trackingCSR</span> = <span style="color: #707183;">[</span>x <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> trackingCSR <span style="color: #a020f0;">if</span> x<span style="color: #7388d6;">[</span>column<span style="color: #7388d6;">]</span> == <span style="color: #8b2252;">"0"</span><span style="color: #707183;">]</span>
+  <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">len</span><span style="color: #707183;">(</span>trackingCSR<span style="color: #707183;">)</span> <span style="color: #a020f0;">is</span> 1:
+    <span style="color: #a020f0;">break</span>
+
+<span style="color: #a0522d;">oxygenGeneratorRating</span> = <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>trackingOGR<span style="color: #7388d6;">[</span>0<span style="color: #7388d6;">]</span>, 2<span style="color: #707183;">)</span>
+<span style="color: #a0522d;">co2ScrubberRating</span> = <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>trackingCSR<span style="color: #7388d6;">[</span>0<span style="color: #7388d6;">]</span>, 2<span style="color: #707183;">)</span>
+
+<span style="color: #a020f0;">print</span><span style="color: #707183;">(</span>oxygenGeneratorRating * co2ScrubberRating<span style="color: #707183;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2fc70a7" class="outline-2">
+<h2 id="org2fc70a7"><span class="section-number-2">4.</span> Giant Squid (Dag 4)</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgc472baa" class="outline-3">
+<h3 id="orgc472baa"><span class="section-number-3">4.1.</span> First Part</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #483d8b;">input</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a020f0;">with</span> <span style="color: #483d8b;">open</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"GiantSquidInput.txt"</span><span style="color: #707183;">)</span> <span style="color: #a020f0;">as</span> fd:
+    <span style="color: #a020f0;">for</span> element <span style="color: #a020f0;">in</span> fd:
+        <span style="color: #483d8b;">input</span>.append<span style="color: #707183;">(</span>element.strip<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>
+
+<span style="color: #a0522d;">drawnNumbers</span> = <span style="color: #483d8b;">input</span><span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>.split<span style="color: #707183;">(</span><span style="color: #8b2252;">','</span><span style="color: #707183;">)</span>
+<span style="color: #483d8b;">input</span> = <span style="color: #483d8b;">input</span><span style="color: #707183;">[</span>1:<span style="color: #707183;">]</span>
+<span style="color: #483d8b;">input</span> = <span style="color: #707183;">[</span>x <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">input</span> <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>x<span style="color: #7388d6;">)</span> &gt; 0<span style="color: #707183;">]</span>
+<span style="color: #a0522d;">availableBoardsRows</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a0522d;">availableBoardsColumns</span> = <span style="color: #707183;">[]</span>
+
+<span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span>0, <span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span><span style="color: #483d8b;">input</span><span style="color: #7388d6;">)</span>-4, 5<span style="color: #707183;">)</span>:
+    <span style="color: #a0522d;">newBoardRows</span> = <span style="color: #707183;">[]</span>
+    <span style="color: #a0522d;">newBoardColumns</span> = <span style="color: #707183;">[]</span>
+    <span style="color: #a020f0;">for</span> j <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span>0, 5<span style="color: #707183;">)</span>:
+        <span style="color: #a0522d;">row</span> = i + j
+        <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">len</span><span style="color: #707183;">(</span><span style="color: #483d8b;">input</span><span style="color: #7388d6;">[</span>row<span style="color: #7388d6;">]</span><span style="color: #707183;">)</span> &gt; 0:
+            <span style="color: #a0522d;">rowList</span> = <span style="color: #483d8b;">input</span><span style="color: #707183;">[</span>row<span style="color: #707183;">]</span>.split<span style="color: #707183;">()</span>
+            newBoardRows.append<span style="color: #707183;">(</span>rowList<span style="color: #707183;">)</span>
+    <span style="color: #a0522d;">newBoardColumns</span> = <span style="color: #707183;">[</span><span style="color: #483d8b;">list</span><span style="color: #7388d6;">(</span>i<span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">zip</span><span style="color: #7388d6;">(</span>*newBoardRows<span style="color: #7388d6;">)</span><span style="color: #707183;">]</span>
+
+    <span style="color: #a0522d;">rowsToDicts</span> = <span style="color: #707183;">[]</span>
+    <span style="color: #a0522d;">columnsToDicts</span> = <span style="color: #707183;">[]</span>
+
+    <span style="color: #a020f0;">for</span> row <span style="color: #a020f0;">in</span> newBoardRows:
+        rowsToDicts.append<span style="color: #707183;">(</span><span style="color: #7388d6;">{</span>x: <span style="color: #008b8b;">False</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> row<span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
+
+    <span style="color: #a020f0;">for</span> column <span style="color: #a020f0;">in</span> newBoardColumns:
+        columnsToDicts.append<span style="color: #707183;">(</span><span style="color: #7388d6;">{</span>x: <span style="color: #008b8b;">False</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> column<span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
+
+    availableBoardsRows.append<span style="color: #707183;">(</span>rowsToDicts<span style="color: #707183;">)</span>
+    availableBoardsColumns.append<span style="color: #707183;">(</span>columnsToDicts<span style="color: #707183;">)</span>
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">computeResult</span><span style="color: #707183;">(</span>latestNum, winningBoard<span style="color: #707183;">)</span>:
+    <span style="color: #a0522d;">sumOfUncalled</span> = 0
+    <span style="color: #a020f0;">for</span> section <span style="color: #a020f0;">in</span> winningBoard:
+        <span style="color: #a020f0;">for</span> key,value <span style="color: #a020f0;">in</span> section.items<span style="color: #707183;">()</span>:
+            <span style="color: #a020f0;">if</span> value <span style="color: #a020f0;">is</span> <span style="color: #008b8b;">False</span>:
+                <span style="color: #a0522d;">sumOfUncalled</span> += <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>key<span style="color: #707183;">)</span>
+    <span style="color: #a020f0;">return</span> sumOfUncalled * <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>latestNum<span style="color: #707183;">)</span>
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">processBingo</span><span style="color: #707183;">()</span>: 
+    <span style="color: #a020f0;">global</span> drawnNumbers
+    <span style="color: #a020f0;">global</span> availableBoardsRows
+    <span style="color: #a020f0;">global</span> availableBoardsColumns
+    <span style="color: #a020f0;">for</span> drawnNum <span style="color: #a020f0;">in</span> drawnNumbers:
+      <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span><span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>availableBoardsRows<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>:
+          <span style="color: #a020f0;">for</span> j <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span><span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>availableBoardsRows<span style="color: #909183;">[</span>i<span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>:
+              <span style="color: #a0522d;">rowDict</span> = availableBoardsRows<span style="color: #707183;">[</span>i<span style="color: #707183;">][</span>j<span style="color: #707183;">]</span>
+              <span style="color: #a0522d;">columnDict</span> = availableBoardsColumns<span style="color: #707183;">[</span>i<span style="color: #707183;">][</span>j<span style="color: #707183;">]</span>
+              <span style="color: #a020f0;">for</span> num <span style="color: #a020f0;">in</span> rowDict:
+                  <span style="color: #a020f0;">if</span> drawnNum == num:
+                      <span style="color: #a0522d;">rowDict</span><span style="color: #707183;">[</span>num<span style="color: #707183;">]</span> = <span style="color: #008b8b;">True</span>
+              <span style="color: #a020f0;">for</span> num <span style="color: #a020f0;">in</span> columnDict:
+                  <span style="color: #a020f0;">if</span> drawnNum == num:
+                      <span style="color: #a0522d;">columnDict</span><span style="color: #707183;">[</span>num<span style="color: #707183;">]</span> = <span style="color: #008b8b;">True</span>
+              <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">all</span><span style="color: #707183;">(</span>value == <span style="color: #008b8b;">True</span> <span style="color: #a020f0;">for</span> value <span style="color: #a020f0;">in</span> rowDict.values<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>:
+                  <span style="color: #a0522d;">winner</span> = availableBoardsRows<span style="color: #707183;">[</span>i<span style="color: #707183;">]</span>
+                  <span style="color: #a020f0;">return</span> computeResult<span style="color: #707183;">(</span>drawnNum, winner<span style="color: #707183;">)</span>
+              <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">all</span><span style="color: #707183;">(</span>value == <span style="color: #008b8b;">True</span> <span style="color: #a020f0;">for</span> value <span style="color: #a020f0;">in</span> columnDict.values<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>:
+                  <span style="color: #a0522d;">winner</span> = availableBoardsColumns<span style="color: #707183;">[</span>i<span style="color: #707183;">]</span>
+                  <span style="color: #a020f0;">return</span> computeResult<span style="color: #707183;">(</span>drawnNum, winner<span style="color: #707183;">)</span>
+
+<span style="color: #a020f0;">print</span><span style="color: #707183;">(</span>processBingo<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge5d3305" class="outline-3">
+<h3 id="orge5d3305"><span class="section-number-3">4.2.</span> Second Part</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #483d8b;">input</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a020f0;">with</span> <span style="color: #483d8b;">open</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"GiantSquidInput.txt"</span><span style="color: #707183;">)</span> <span style="color: #a020f0;">as</span> fd:
+    <span style="color: #a020f0;">for</span> element <span style="color: #a020f0;">in</span> fd:
+        <span style="color: #483d8b;">input</span>.append<span style="color: #707183;">(</span>element.strip<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>
+
+<span style="color: #a0522d;">drawnNumbers</span> = <span style="color: #483d8b;">input</span><span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>.split<span style="color: #707183;">(</span><span style="color: #8b2252;">','</span><span style="color: #707183;">)</span>
+<span style="color: #483d8b;">input</span> = <span style="color: #483d8b;">input</span><span style="color: #707183;">[</span>1:<span style="color: #707183;">]</span>
+<span style="color: #483d8b;">input</span> = <span style="color: #707183;">[</span>x <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">input</span> <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>x<span style="color: #7388d6;">)</span> &gt; 0<span style="color: #707183;">]</span>
+<span style="color: #a0522d;">availableBoardsRows</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a0522d;">availableBoardsColumns</span> = <span style="color: #707183;">[]</span>
+
+<span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span>0, <span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span><span style="color: #483d8b;">input</span><span style="color: #7388d6;">)</span>-4, 5<span style="color: #707183;">)</span>:
+    <span style="color: #a0522d;">newBoardRows</span> = <span style="color: #707183;">[]</span>
+    <span style="color: #a0522d;">newBoardColumns</span> = <span style="color: #707183;">[]</span>
+    <span style="color: #a020f0;">for</span> j <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span>0, 5<span style="color: #707183;">)</span>:
+        <span style="color: #a0522d;">row</span> = i + j
+        <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">len</span><span style="color: #707183;">(</span><span style="color: #483d8b;">input</span><span style="color: #7388d6;">[</span>row<span style="color: #7388d6;">]</span><span style="color: #707183;">)</span> &gt; 0:
+            <span style="color: #a0522d;">rowList</span> = <span style="color: #483d8b;">input</span><span style="color: #707183;">[</span>row<span style="color: #707183;">]</span>.split<span style="color: #707183;">()</span>
+            newBoardRows.append<span style="color: #707183;">(</span>rowList<span style="color: #707183;">)</span>
+    <span style="color: #a0522d;">newBoardColumns</span> = <span style="color: #707183;">[</span><span style="color: #483d8b;">list</span><span style="color: #7388d6;">(</span>i<span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">zip</span><span style="color: #7388d6;">(</span>*newBoardRows<span style="color: #7388d6;">)</span><span style="color: #707183;">]</span>
+
+    <span style="color: #a0522d;">rowsToDicts</span> = <span style="color: #707183;">[]</span>
+    <span style="color: #a0522d;">columnsToDicts</span> = <span style="color: #707183;">[]</span>
+
+    <span style="color: #a020f0;">for</span> row <span style="color: #a020f0;">in</span> newBoardRows:
+        rowsToDicts.append<span style="color: #707183;">(</span><span style="color: #7388d6;">{</span>x: <span style="color: #008b8b;">False</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> row<span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
+
+    <span style="color: #a020f0;">for</span> column <span style="color: #a020f0;">in</span> newBoardColumns:
+        columnsToDicts.append<span style="color: #707183;">(</span><span style="color: #7388d6;">{</span>x: <span style="color: #008b8b;">False</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> column<span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
+
+    availableBoardsRows.append<span style="color: #707183;">(</span>rowsToDicts<span style="color: #707183;">)</span>
+    availableBoardsColumns.append<span style="color: #707183;">(</span>columnsToDicts<span style="color: #707183;">)</span>
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">computeResult</span><span style="color: #707183;">(</span>latestNum, winningBoard<span style="color: #707183;">)</span>:
+    <span style="color: #a0522d;">sumOfUncalled</span> = 0
+    <span style="color: #a020f0;">for</span> section <span style="color: #a020f0;">in</span> winningBoard:
+        <span style="color: #a020f0;">for</span> key,value <span style="color: #a020f0;">in</span> section.items<span style="color: #707183;">()</span>:
+            <span style="color: #a020f0;">if</span> value <span style="color: #a020f0;">is</span> <span style="color: #008b8b;">False</span>:
+                <span style="color: #a0522d;">sumOfUncalled</span> += <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>key<span style="color: #707183;">)</span>
+    <span style="color: #a020f0;">return</span> sumOfUncalled * <span style="color: #483d8b;">int</span><span style="color: #707183;">(</span>latestNum<span style="color: #707183;">)</span>
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">processBingo</span><span style="color: #707183;">()</span>:
+    <span style="color: #a020f0;">global</span> drawnNumbers
+    <span style="color: #a020f0;">global</span> availableBoardsRows
+    <span style="color: #a020f0;">global</span> availableBoardsColumns
+
+    <span style="color: #a0522d;">successiveWinners</span> = <span style="color: #707183;">[]</span>
+
+    <span style="color: #a020f0;">for</span> drawnNum <span style="color: #a020f0;">in</span> drawnNumbers:
+      <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span><span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>availableBoardsRows<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>:
+          <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">len</span><span style="color: #707183;">(</span>availableBoardsRows<span style="color: #7388d6;">[</span>i<span style="color: #7388d6;">]</span><span style="color: #707183;">)</span> &gt; 0:
+              <span style="color: #a020f0;">for</span> j <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span><span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>availableBoardsRows<span style="color: #909183;">[</span>i<span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>:
+                  <span style="color: #a0522d;">rowDict</span> = availableBoardsRows<span style="color: #707183;">[</span>i<span style="color: #707183;">][</span>j<span style="color: #707183;">]</span>
+                  <span style="color: #a0522d;">columnDict</span> = availableBoardsColumns<span style="color: #707183;">[</span>i<span style="color: #707183;">][</span>j<span style="color: #707183;">]</span>
+                  <span style="color: #a020f0;">for</span> num <span style="color: #a020f0;">in</span> rowDict:
+                      <span style="color: #a020f0;">if</span> drawnNum == num:
+                          <span style="color: #a0522d;">rowDict</span><span style="color: #707183;">[</span>num<span style="color: #707183;">]</span> = <span style="color: #008b8b;">True</span>
+                  <span style="color: #a020f0;">for</span> num <span style="color: #a020f0;">in</span> columnDict:
+                      <span style="color: #a020f0;">if</span> drawnNum == num:
+                          <span style="color: #a0522d;">columnDict</span><span style="color: #707183;">[</span>num<span style="color: #707183;">]</span> = <span style="color: #008b8b;">True</span>
+                  <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">all</span><span style="color: #707183;">(</span>value == <span style="color: #008b8b;">True</span> <span style="color: #a020f0;">for</span> value <span style="color: #a020f0;">in</span> rowDict.values<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>:
+                      <span style="color: #a0522d;">winner</span> = availableBoardsRows<span style="color: #707183;">[</span>i<span style="color: #707183;">]</span>
+                      successiveWinners.append<span style="color: #707183;">(</span>computeResult<span style="color: #7388d6;">(</span>drawnNum, winner<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+                      <span style="color: #a0522d;">availableBoardsRows</span><span style="color: #707183;">[</span>i<span style="color: #707183;">]</span> = <span style="color: #707183;">[]</span>
+                      <span style="color: #a0522d;">availableBoardsColumns</span><span style="color: #707183;">[</span>i<span style="color: #707183;">]</span> = <span style="color: #707183;">[]</span>
+                      <span style="color: #a020f0;">break</span>
+                  <span style="color: #a020f0;">elif</span> <span style="color: #483d8b;">all</span><span style="color: #707183;">(</span>value == <span style="color: #008b8b;">True</span> <span style="color: #a020f0;">for</span> value <span style="color: #a020f0;">in</span> columnDict.values<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>:
+                      <span style="color: #a0522d;">winner</span> = availableBoardsColumns<span style="color: #707183;">[</span>i<span style="color: #707183;">]</span>
+                      successiveWinners.append<span style="color: #707183;">(</span>computeResult<span style="color: #7388d6;">(</span>drawnNum, winner<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+                      <span style="color: #a0522d;">availableBoardsRows</span><span style="color: #707183;">[</span>i<span style="color: #707183;">]</span> = <span style="color: #707183;">[]</span>
+                      <span style="color: #a0522d;">availableBoardsColumns</span><span style="color: #707183;">[</span>i<span style="color: #707183;">]</span> = <span style="color: #707183;">[]</span>
+                      <span style="color: #a020f0;">break</span>
+    <span style="color: #a020f0;">return</span> successiveWinners
+
+<span style="color: #a0522d;">winners</span> = processBingo<span style="color: #707183;">()</span>
+<span style="color: #a020f0;">print</span><span style="color: #707183;">(</span>winners<span style="color: #7388d6;">[</span>-1<span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb83bb6e" class="outline-2">
+<h2 id="orgb83bb6e"><span class="section-number-2">5.</span> Hydrothermal Venture (Dag 5)</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org9019b71" class="outline-3">
+<h3 id="org9019b71"><span class="section-number-3">5.1.</span> First Part</h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #483d8b;">input</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a020f0;">with</span> <span style="color: #483d8b;">open</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"HydrothermalVentureInput.txt"</span><span style="color: #707183;">)</span> <span style="color: #a020f0;">as</span> fd:
+  <span style="color: #a020f0;">for</span> element <span style="color: #a020f0;">in</span> fd:
+    <span style="color: #483d8b;">input</span>.append<span style="color: #707183;">(</span>element.strip<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>
+
+<span style="color: #483d8b;">input</span> = <span style="color: #707183;">[</span>x.split<span style="color: #7388d6;">(</span><span style="color: #8b2252;">" -&gt; "</span><span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">input</span><span style="color: #707183;">]</span>
+
+<span style="color: #a0522d;">listOfAllPoints</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a0522d;">overlappingPointsDict</span> = <span style="color: #707183;">{}</span>
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">generatePointsForEntry</span><span style="color: #707183;">(</span>entry<span style="color: #707183;">)</span>:
+  <span style="color: #a0522d;">pointA</span> = entry<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>.split<span style="color: #707183;">(</span><span style="color: #8b2252;">","</span><span style="color: #707183;">)</span>
+  <span style="color: #a0522d;">pointB</span> = entry<span style="color: #707183;">[</span>1<span style="color: #707183;">]</span>.split<span style="color: #707183;">(</span><span style="color: #8b2252;">","</span><span style="color: #707183;">)</span>
+  <span style="color: #a0522d;">pointA</span> = <span style="color: #707183;">[</span><span style="color: #483d8b;">int</span><span style="color: #7388d6;">(</span>x<span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> pointA<span style="color: #707183;">]</span>
+  <span style="color: #a0522d;">pointB</span> = <span style="color: #707183;">[</span><span style="color: #483d8b;">int</span><span style="color: #7388d6;">(</span>x<span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> pointB<span style="color: #707183;">]</span>
+  <span style="color: #a020f0;">if</span> pointA<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span> == pointB<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>:
+    <span style="color: #a0522d;">xPoint</span> = pointA<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>
+    <span style="color: #a0522d;">theRange</span> = <span style="color: #707183;">[</span>pointA<span style="color: #7388d6;">[</span>1<span style="color: #7388d6;">]</span> , pointB<span style="color: #7388d6;">[</span>1<span style="color: #7388d6;">]</span><span style="color: #707183;">]</span>
+    <span style="color: #a020f0;">return</span> <span style="color: #707183;">[</span><span style="color: #483d8b;">str</span><span style="color: #7388d6;">(</span>xPoint<span style="color: #7388d6;">)</span> + <span style="color: #8b2252;">","</span> + <span style="color: #483d8b;">str</span><span style="color: #7388d6;">(</span>y<span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> y <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #7388d6;">(</span><span style="color: #483d8b;">min</span><span style="color: #909183;">(</span>theRange<span style="color: #909183;">)</span>, <span style="color: #483d8b;">max</span><span style="color: #909183;">(</span>theRange<span style="color: #909183;">)</span> + 1<span style="color: #7388d6;">)</span><span style="color: #707183;">]</span>
+  <span style="color: #a020f0;">elif</span> pointA<span style="color: #707183;">[</span>1<span style="color: #707183;">]</span> == pointB<span style="color: #707183;">[</span>1<span style="color: #707183;">]</span>:
+    <span style="color: #a0522d;">yPoint</span> = pointB<span style="color: #707183;">[</span>1<span style="color: #707183;">]</span>
+    <span style="color: #a0522d;">theRange</span> = <span style="color: #707183;">[</span>pointA<span style="color: #7388d6;">[</span>0<span style="color: #7388d6;">]</span> , pointB<span style="color: #7388d6;">[</span>0<span style="color: #7388d6;">]</span><span style="color: #707183;">]</span>
+    <span style="color: #a020f0;">return</span> <span style="color: #707183;">[</span><span style="color: #483d8b;">str</span><span style="color: #7388d6;">(</span>x<span style="color: #7388d6;">)</span> + <span style="color: #8b2252;">","</span> + <span style="color: #483d8b;">str</span><span style="color: #7388d6;">(</span>yPoint<span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #7388d6;">(</span><span style="color: #483d8b;">min</span><span style="color: #909183;">(</span>theRange<span style="color: #909183;">)</span>, <span style="color: #483d8b;">max</span><span style="color: #909183;">(</span>theRange<span style="color: #909183;">)</span> + 1<span style="color: #7388d6;">)</span><span style="color: #707183;">]</span>
+  <span style="color: #a020f0;">else</span>:
+    <span style="color: #a020f0;">return</span> <span style="color: #707183;">[]</span>
+
+<span style="color: #a020f0;">for</span> entry <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">input</span>:
+  listOfAllPoints.append<span style="color: #707183;">(</span>generatePointsForEntry<span style="color: #7388d6;">(</span>entry<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #a020f0;">for</span> points <span style="color: #a020f0;">in</span> listOfAllPoints:
+  <span style="color: #a020f0;">if</span> points:
+    <span style="color: #a020f0;">for</span> point <span style="color: #a020f0;">in</span> points:
+      <span style="color: #a020f0;">if</span> point <span style="color: #a020f0;">in</span> overlappingPointsDict:
+          <span style="color: #a0522d;">overlappingPointsDict</span><span style="color: #707183;">[</span>point<span style="color: #707183;">]</span> += 1
+      <span style="color: #a020f0;">else</span>:
+          overlappingPointsDict.update<span style="color: #707183;">(</span><span style="color: #7388d6;">{</span>point : 1<span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
+
+<span style="color: #a0522d;">allOverlappingValues</span> = <span style="color: #707183;">[</span>x <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> overlappingPointsDict.values<span style="color: #7388d6;">()</span> <span style="color: #a020f0;">if</span> x &gt; 1<span style="color: #707183;">]</span>
+
+<span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>allOverlappingValues<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7f30d6f" class="outline-3">
+<h3 id="org7f30d6f"><span class="section-number-3">5.2.</span> Second Part</h3>
+<div class="outline-text-3" id="text-5-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #483d8b;">input</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a020f0;">with</span> <span style="color: #483d8b;">open</span><span style="color: #707183;">(</span><span style="color: #8b2252;">"HydrothermalVentureInput.txt"</span><span style="color: #707183;">)</span> <span style="color: #a020f0;">as</span> fd:
+  <span style="color: #a020f0;">for</span> element <span style="color: #a020f0;">in</span> fd:
+    <span style="color: #483d8b;">input</span>.append<span style="color: #707183;">(</span>element.strip<span style="color: #7388d6;">()</span><span style="color: #707183;">)</span>
+
+<span style="color: #483d8b;">input</span> = <span style="color: #707183;">[</span>x.split<span style="color: #7388d6;">(</span><span style="color: #8b2252;">" -&gt; "</span><span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">input</span><span style="color: #707183;">]</span>
+
+<span style="color: #a0522d;">listOfAllPoints</span> = <span style="color: #707183;">[]</span>
+<span style="color: #a0522d;">overlappingPointsDict</span> = <span style="color: #707183;">{}</span>
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">generatePointsForEntry</span><span style="color: #707183;">(</span>entry<span style="color: #707183;">)</span>:
+  <span style="color: #a0522d;">pointA</span> = entry<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>.split<span style="color: #707183;">(</span><span style="color: #8b2252;">","</span><span style="color: #707183;">)</span>
+  <span style="color: #a0522d;">pointB</span> = entry<span style="color: #707183;">[</span>1<span style="color: #707183;">]</span>.split<span style="color: #707183;">(</span><span style="color: #8b2252;">","</span><span style="color: #707183;">)</span>
+  <span style="color: #a0522d;">pointA</span> = <span style="color: #707183;">[</span><span style="color: #483d8b;">int</span><span style="color: #7388d6;">(</span>x<span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> pointA<span style="color: #707183;">]</span>
+  <span style="color: #a0522d;">pointB</span> = <span style="color: #707183;">[</span><span style="color: #483d8b;">int</span><span style="color: #7388d6;">(</span>x<span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> pointB<span style="color: #707183;">]</span>
+  <span style="color: #a020f0;">if</span> pointA<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span> == pointB<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>:
+    <span style="color: #a0522d;">xPoint</span> = pointA<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>
+    <span style="color: #a0522d;">theRange</span> = <span style="color: #707183;">[</span>pointA<span style="color: #7388d6;">[</span>1<span style="color: #7388d6;">]</span> , pointB<span style="color: #7388d6;">[</span>1<span style="color: #7388d6;">]</span><span style="color: #707183;">]</span>
+    <span style="color: #a020f0;">return</span> <span style="color: #707183;">[</span><span style="color: #483d8b;">str</span><span style="color: #7388d6;">(</span>xPoint<span style="color: #7388d6;">)</span> + <span style="color: #8b2252;">","</span> + <span style="color: #483d8b;">str</span><span style="color: #7388d6;">(</span>y<span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> y <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #7388d6;">(</span><span style="color: #483d8b;">min</span><span style="color: #909183;">(</span>theRange<span style="color: #909183;">)</span>, <span style="color: #483d8b;">max</span><span style="color: #909183;">(</span>theRange<span style="color: #909183;">)</span> + 1<span style="color: #7388d6;">)</span><span style="color: #707183;">]</span>
+  <span style="color: #a020f0;">elif</span> pointA<span style="color: #707183;">[</span>1<span style="color: #707183;">]</span> == pointB<span style="color: #707183;">[</span>1<span style="color: #707183;">]</span>:
+    <span style="color: #a0522d;">yPoint</span> = pointB<span style="color: #707183;">[</span>1<span style="color: #707183;">]</span>
+    <span style="color: #a0522d;">theRange</span> = <span style="color: #707183;">[</span>pointA<span style="color: #7388d6;">[</span>0<span style="color: #7388d6;">]</span> , pointB<span style="color: #7388d6;">[</span>0<span style="color: #7388d6;">]</span><span style="color: #707183;">]</span>
+    <span style="color: #a020f0;">return</span> <span style="color: #707183;">[</span><span style="color: #483d8b;">str</span><span style="color: #7388d6;">(</span>x<span style="color: #7388d6;">)</span> + <span style="color: #8b2252;">","</span> + <span style="color: #483d8b;">str</span><span style="color: #7388d6;">(</span>yPoint<span style="color: #7388d6;">)</span> <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #7388d6;">(</span><span style="color: #483d8b;">min</span><span style="color: #909183;">(</span>theRange<span style="color: #909183;">)</span>, <span style="color: #483d8b;">max</span><span style="color: #909183;">(</span>theRange<span style="color: #909183;">)</span> + 1<span style="color: #7388d6;">)</span><span style="color: #707183;">]</span>
+  <span style="color: #a020f0;">else</span>:
+    <span style="color: #a0522d;">reverseX</span> = <span style="color: #008b8b;">False</span>
+    <span style="color: #a0522d;">reverseY</span> = <span style="color: #008b8b;">False</span>
+    <span style="color: #a020f0;">if</span> pointA<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span> &gt; pointB<span style="color: #707183;">[</span>0<span style="color: #707183;">]</span>:
+      <span style="color: #a0522d;">reverseX</span> = <span style="color: #008b8b;">True</span>
+    <span style="color: #a020f0;">if</span> pointA<span style="color: #707183;">[</span>1<span style="color: #707183;">]</span> &gt; pointB<span style="color: #707183;">[</span>1<span style="color: #707183;">]</span>:
+      <span style="color: #a0522d;">reverseY</span> = <span style="color: #008b8b;">True</span>
+    <span style="color: #a0522d;">xValues</span> = <span style="color: #707183;">[</span>x <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #7388d6;">(</span><span style="color: #483d8b;">min</span><span style="color: #909183;">(</span>pointA<span style="color: #709870;">[</span>0<span style="color: #709870;">]</span>, pointB<span style="color: #709870;">[</span>0<span style="color: #709870;">]</span><span style="color: #909183;">)</span>, <span style="color: #483d8b;">max</span><span style="color: #909183;">(</span>pointA<span style="color: #709870;">[</span>0<span style="color: #709870;">]</span>, pointB<span style="color: #709870;">[</span>0<span style="color: #709870;">]</span><span style="color: #909183;">)</span>+1<span style="color: #7388d6;">)</span><span style="color: #707183;">]</span>
+    <span style="color: #a0522d;">yValues</span> = <span style="color: #707183;">[</span>y <span style="color: #a020f0;">for</span> y <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #7388d6;">(</span><span style="color: #483d8b;">min</span><span style="color: #909183;">(</span>pointA<span style="color: #709870;">[</span>1<span style="color: #709870;">]</span>, pointB<span style="color: #709870;">[</span>1<span style="color: #709870;">]</span><span style="color: #909183;">)</span>, <span style="color: #483d8b;">max</span><span style="color: #909183;">(</span>pointA<span style="color: #709870;">[</span>1<span style="color: #709870;">]</span>, pointB<span style="color: #709870;">[</span>1<span style="color: #709870;">]</span><span style="color: #909183;">)</span>+1<span style="color: #7388d6;">)</span><span style="color: #707183;">]</span>
+    <span style="color: #a020f0;">if</span> reverseX:
+      xValues.reverse<span style="color: #707183;">()</span>
+    <span style="color: #a020f0;">if</span> reverseY:
+      yValues.reverse<span style="color: #707183;">()</span>
+    <span style="color: #a0522d;">generatedPoints</span> = <span style="color: #707183;">[]</span>
+    <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span><span style="color: #707183;">(</span><span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>xValues<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>:
+      generatedPoints.append<span style="color: #707183;">(</span><span style="color: #483d8b;">str</span><span style="color: #7388d6;">(</span>xValues<span style="color: #909183;">[</span>i<span style="color: #909183;">]</span><span style="color: #7388d6;">)</span> + <span style="color: #8b2252;">","</span> + <span style="color: #483d8b;">str</span><span style="color: #7388d6;">(</span>yValues<span style="color: #909183;">[</span>i<span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+    <span style="color: #a020f0;">return</span> generatedPoints
+
+
+<span style="color: #a020f0;">for</span> entry <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">input</span>:
+  listOfAllPoints.append<span style="color: #707183;">(</span>generatePointsForEntry<span style="color: #7388d6;">(</span>entry<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #a020f0;">for</span> points <span style="color: #a020f0;">in</span> listOfAllPoints:
+  <span style="color: #a020f0;">if</span> points:
+    <span style="color: #a020f0;">for</span> point <span style="color: #a020f0;">in</span> points:
+      <span style="color: #a020f0;">if</span> point <span style="color: #a020f0;">in</span> overlappingPointsDict:
+          <span style="color: #a0522d;">overlappingPointsDict</span><span style="color: #707183;">[</span>point<span style="color: #707183;">]</span> += 1
+      <span style="color: #a020f0;">else</span>:
+          overlappingPointsDict.update<span style="color: #707183;">(</span><span style="color: #7388d6;">{</span>point : 1<span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>
+
+<span style="color: #a0522d;">allOverlappingValues</span> = <span style="color: #707183;">[</span>x <span style="color: #a020f0;">for</span> x <span style="color: #a020f0;">in</span> overlappingPointsDict.values<span style="color: #7388d6;">()</span> <span style="color: #a020f0;">if</span> x &gt; 1<span style="color: #707183;">]</span>
+
+<span style="color: #a020f0;">print</span><span style="color: #707183;">(</span><span style="color: #483d8b;">len</span><span style="color: #7388d6;">(</span>allOverlappingValues<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Carl Ola Fornander</p>
+<p class="date">Created: 2021-12-05 sön 23:12</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
