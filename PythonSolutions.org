@@ -337,3 +337,39 @@
 
 #+RESULTS:
 : 23541
+
+
+* Hydrothermal Venture (Dag 5)
+** First Part
+#+begin_src python :results output :python python3
+  input = []
+  with open("HydrothermalVentureInput.txt") as fd:
+    for element in fd:
+      input.append(element.strip())
+
+  input = [x.split("->") for x in input]
+
+  listOfAllPoints = []
+  overlappingPointsDict = {}
+
+  def generatePointsForEntry(entry):
+    pointA = entry[0].split(",")
+    pointB = entry[1].split(",")
+    pointA = [int(x) for x in pointA]
+    pointB = [int(x) for x in pointB]
+    if pointA[0] == pointB[0]:
+      staticPoint = pointA[0]
+      theRange = list(pointA[1] + pointB[1])
+    else:
+      staticPoint = pointA[1]
+      theRange = list(pointA[0] + pointB[0])
+
+
+  generatePointsForEntry(input[0])
+
+
+#+end_src
+
+#+RESULTS:
+: [682, 519]
+: [682, 729]
