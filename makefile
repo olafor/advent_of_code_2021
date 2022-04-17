@@ -11,5 +11,8 @@ sonar-sweep:
 dive:
 	$(CC) $(CFLAGS) dive.c -o $(TARGET)
 
+binary-diagnostic:
+	$(CC) $(CFLAGS) binaryDiagnostic.c -o $(TARGET)
+
 clean: 
 	rm $(TARGET)

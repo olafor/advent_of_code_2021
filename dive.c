@@ -3,46 +3,26 @@
 #include <string.h>
 
 #define LINE_LENGTH 11
-
-void extractInput(char rawLine[LINE_LENGTH], char **dir, int *mag) {
-    char *refinedLine = (char *)malloc(strlen(rawLine) + 1);
-    strcpy(refinedLine, rawLine);
-
-    if ((*dir= strsep(&refinedLine, " ")) == NULL) {
-        printf("Error 1...\n");
-    }
-
-    char *str;
-    if ((str = strsep(&refinedLine, " ")) != NULL) {
-        *mag= atoi(str);
-    }
-    else
-        printf("Error 2...\n");
-}
-
-void updatePosition(char *dir, int mag, int *hPos, int *dPos) {
-    if (strncmp(dir, "forward", strlen(dir)) == 0)
-        *hPos += mag;
-    else if (strncmp(dir, "up", strlen(dir)) == 0)
-        *dPos -= mag;
-    else if (strncmp(dir, "down", strlen(dir)) == 0)
-        *dPos += mag;
-    else
-        printf("Error 3...\n");
-}
+#define FORWARD "forward"
+#define UP "up"
+#define DOWN "down"
 
 int main() {
+    void extractDirectionAndMagnitude(char rawLine[LINE_LENGTH], char**, int*);
+    void updatePosition(char*, int, int*, int*, int*);
+
     FILE *fileStream;
     char line[LINE_LENGTH] = "";
     char *direction = "";
     int magnitude = 0;
     int horizontalPosition = 0;
     int depth = 0;
+    int aim = 0;
 
     if ((fileStream = fopen("DiveInput.txt", "r"))) {
         while (fgets(line, LINE_LENGTH, fileStream)) {
-            extractInput(line, &direction, &magnitude);
-            updatePosition(direction, magnitude, &horizontalPosition, &depth);
+            extractDirectionAndMagnitude(line, &direction, &magnitude);
+            updatePosition(direction, magnitude, &horizontalPosition, &depth, &aim);
         }
 
         printf("Result: %d\n", horizontalPosition * depth);
@@ -51,4 +31,29 @@ int main() {
     fclose(fileStream);
 
     return 0;
+}
+
+void extractDirectionAndMagnitude(char rawLine[LINE_LENGTH], char **direction, int *magnitude) {
+    char *refinedLine = (char *) malloc(strlen(rawLine) + 1);
+    strcpy(refinedLine, rawLine);
+
+    char *copiedRefinedLine = strdup(refinedLine);
+
+    *direction = strsep(&copiedRefinedLine, " ");
+    *magnitude = atoi(copiedRefinedLine);
+
+    free(refinedLine);
+}
+
+void updatePosition(char *direction, int magnitude, int *hPos, int *dPos, int *aim) {
+    if (strncmp(direction, FORWARD, strlen(direction)) == 0) {
+        *hPos += magnitude;
+        *dPos += magnitude * (*aim);
+    }
+    else if (strncmp(direction, UP, strlen(direction)) == 0)
+        *aim -= magnitude;
+    else if (strncmp(direction, DOWN, strlen(direction)) == 0)
+        *aim += magnitude;
+    else
+        printf("Error...\n");
 }
