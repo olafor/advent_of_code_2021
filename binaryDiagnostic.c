@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+// TODO: BUFSIZE should be able to be higher with the same Result retained
 #define BUFSIZE 13
-#define INIT_SIZE 2
+#define INIT_SIZE 5
 
 typedef struct {
     int *array;
@@ -16,7 +17,7 @@ int main() {
     void appendArray(Array*, int);
     void freeArray(Array*);
     unsigned int getGamma(Array*, unsigned int);
-    unsigned int getEpsilon(unsigned int, unsigned int);
+    unsigned int getInvertedNLeastSigBits(unsigned int, unsigned int);
 
     FILE *fileStream;
     char line[BUFSIZE] = "";
@@ -40,8 +41,9 @@ int main() {
     }
 
     unsigned int gamma = getGamma(&countsOfOnes, numberOfEntries);
-    unsigned int epsilon = getEpsilon(gamma, countsOfOnes.used);
+    unsigned int epsilon = getInvertedNLeastSigBits(gamma, countsOfOnes.used);
 
+    printf("gamme: %d, epsilon: %d\n", gamma , epsilon);
     printf("Result: %d\n", gamma * epsilon);
     freeArray(&countsOfOnes);
 }
@@ -68,26 +70,19 @@ void freeArray(Array *arr) {
 
 unsigned int getGamma(Array *arr, unsigned int noOfEntries) {
     unsigned int gamma = 0;
-    unsigned int mask = 1;
 
-    for (int i = arr->used - 1; i >= 0; --i) {
-        if (arr->array[i] > noOfEntries / 2) 
-            gamma = (gamma & ~mask) | (0xfff & mask);
-        else 
-            gamma = (gamma & ~mask) | (0 & mask);
-        
-        mask = mask << 1;
+    for (int bit = 0; bit < arr->used; ++bit) {
+        if (arr->array[arr->used - 1 - bit] > noOfEntries / 2)
+            gamma |= (1 << bit);
+        else
+            gamma &= ~(1 << bit);
     }
     return gamma;
 }
 
-unsigned int getEpsilon(unsigned int gamma, unsigned int noOfBits) {
-    unsigned int mask = 1;
-    unsigned int epsilon = gamma;
-
-    for (int i = 0; i < noOfBits; ++i) {
-        epsilon = (epsilon & ~mask) | (~epsilon & mask);
-        mask = mask << 1;
+unsigned int getInvertedNLeastSigBits(unsigned int num, unsigned int noOfBits) {
+    for (int bit = 0; bit < noOfBits; ++bit) {
+        num ^= (1 << bit);
     }
-    return epsilon;
+    return num;
 }
